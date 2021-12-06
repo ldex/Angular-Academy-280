@@ -5,7 +5,9 @@
     <p>Price: {{product.price | currency:'CAD':'symbol-narrow':'.2'}}</p>
     <p>
         Edit price:
-        <input type="number" [(ngModel)]="product.price">
+        <input type="number"
+             [(ngModel)]="product.price"
+             [disabled]="product.fixedPrice">
     </p>
     <p>Fixed price? {{product.fixedPrice}}</p>
     <p>Discontinued?
