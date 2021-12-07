@@ -6,10 +6,11 @@ import { ErrorComponent } from './shared/error.component';
 import { HomeComponent } from './shared/home.component';
 
 const routes: Routes = [
+  { path: '', redirectTo:'/home', pathMatch:'full' },
   { path: 'home', component: HomeComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'admin', component: AdminComponent },
-  { path: '**', component: ErrorComponent }
+  { path: '**', component: ErrorComponent },
 ];
 
 @NgModule({
