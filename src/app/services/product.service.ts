@@ -16,6 +16,19 @@ export class ProductService {
   }
 
   initProducts(): void {
-    this.products$ = this.http.get<Product[]>(this.baseUrl);
+    this.products$ = this
+                      .http
+                      .get<Product[]>(this.baseUrl)
+                      .pipe(
+                        tap(console.table),
+                        delay(1500), // Juste pour simuler un délai!
+                        shareReplay(),
+                        catchError(
+                          error => {
+                            console.log(error);
+                            return throwError(() => "Networking problem.")
+                          }
+                        )
+                      );
   }
 }
