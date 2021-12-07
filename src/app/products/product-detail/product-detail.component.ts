@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 import { ProductService } from 'src/app/services/product.service';
 import { Product } from '../product.interface';
 
@@ -10,7 +11,7 @@ import { Product } from '../product.interface';
 })
 export class ProductDetailComponent implements OnInit {
 
-  @Input() product: Product;
+  product$: Observable<Product>;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -22,13 +23,9 @@ export class ProductDetailComponent implements OnInit {
   ngOnInit(): void {
     let id = this.activatedRoute.snapshot.params['id'];
 
-    this
-      .productService
-      .getProductById(id)
-      .subscribe(
-        data => this.product = data
-      )
-
+    this.product$ = this
+                      .productService
+                      .getProductById(id);
   }
 
 }
